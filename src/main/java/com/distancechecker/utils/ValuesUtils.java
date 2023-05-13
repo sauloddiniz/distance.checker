@@ -1,5 +1,5 @@
 package com.distancechecker.utils;
 
-public class UtilValues {
+public class ValuesUtils {
     public final static int FIRST_POSITION = 0;
 }

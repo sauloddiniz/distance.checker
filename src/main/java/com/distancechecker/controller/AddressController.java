@@ -1,16 +1,18 @@
 package com.distancechecker.controller;
 
-import com.distancechecker.exceptions.AddressBlankException;
+import com.distancechecker.dto.ResponseDto;
+import com.distancechecker.dto.error.ErrorResponseDto;
 import com.distancechecker.service.AddressService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-
-import static com.distancechecker.UtilValues.FIRST_ELEMENT;
 
 @Slf4j
 @CrossOrigin("*")
@@ -27,12 +29,23 @@ public class AddressController {
     }
 
     @GetMapping
-    ResponseEntity<Object> getAddress(@RequestParam(value = "address") String address) {
-
-        if(address.isEmpty() || StringUtils.isEmpty(address)) {
-            throw new AddressBlankException();
-        }
-        return ResponseEntity.ok(addressService.getListAddress(address));
+    @Operation(
+            summary = "Compare the distance between the addresses",
+            description = "Please enter a minimum of three addresses, separated by the semicolon character ( ; )."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success",
+                    content = {@Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = ResponseDto.class)))}),
+            @ApiResponse(responseCode = "400", description = "Bad Request",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponseDto.class))}),
+            @ApiResponse(responseCode = "404", description = "Not Found",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponseDto.class))})
+    })
+    ResponseEntity<ResponseDto> getAddress(@RequestParam(value = "address") String address) {
+        return ResponseEntity.ok(addressService.mountListAddress(address));
     }
 
 }

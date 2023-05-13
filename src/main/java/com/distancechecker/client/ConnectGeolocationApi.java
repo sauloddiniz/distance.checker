@@ -13,5 +13,5 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface ConnectGeolocationApi {
 
     @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<ResponseGeolocationApiDto> getGeolocationByAddress(@RequestParam("address") final String address);
+    ResponseGeolocationApiDto getGeolocationByAddress(@RequestParam("address") final String address);
 }

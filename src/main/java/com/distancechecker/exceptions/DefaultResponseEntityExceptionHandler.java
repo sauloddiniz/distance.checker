@@ -31,9 +31,42 @@ public class DefaultResponseEntityExceptionHandler extends ResponseEntityExcepti
                     .method(request.getMethod())
                 .build());
     }
+    @ExceptionHandler(ZeroResultsAddressException.class)
+    public ResponseEntity<ErrorResponseDto> zeroResultsAddressException(ZeroResultsAddressException exception, HttpServletRequest request){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(ErrorResponseDto
+                .builder()
+                    .message(exception.getMessage())
+                    .status(HttpStatus.NOT_FOUND.value())
+                    .path(request.getServletPath())
+                    .method(request.getMethod())
+                .build());
+    }
 
     @ExceptionHandler(AddressBlankException.class)
     public ResponseEntity<ErrorResponseDto> addressBlankException(AddressBlankException exception, HttpServletRequest request){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(ErrorResponseDto
+                        .builder()
+                        .message(exception.getMessage())
+                        .status(HttpStatus.BAD_REQUEST.value())
+                        .path(request.getServletPath())
+                        .method(request.getMethod())
+                        .build());
+    }
+    @ExceptionHandler(GenericAddressException.class)
+    public ResponseEntity<ErrorResponseDto> genericAddressException(GenericAddressException exception, HttpServletRequest request){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(ErrorResponseDto
+                        .builder()
+                        .message(exception.getMessage())
+                        .status(HttpStatus.BAD_REQUEST.value())
+                        .path(request.getServletPath())
+                        .method(request.getMethod())
+                        .build());
+    }
+    @ExceptionHandler(InsufficientAddressException.class)
+    public ResponseEntity<ErrorResponseDto> insufficientAddressException(InsufficientAddressException exception, HttpServletRequest request){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(ErrorResponseDto
                         .builder()
