@@ -44,7 +44,10 @@ public class AddressController {
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponseDto.class))})
     })
-    ResponseEntity<ResponseDto> getAddress(@RequestParam(value = "address") String address) {
+    ResponseEntity<ResponseDto> getAddress(@RequestParam(value = "address",
+            defaultValue = "Av Rio Branco, 1, Centro Rio de Janeiro RJ;" +
+                            "Praça Mal. Âncora, 122, Centro, Rio de Janeiro RJ;" +
+                            "Rua 19 de Fevereiro, 34, Botafogo, Rio de Janeiro RJ;") String address) {
         return ResponseEntity.ok(addressService.mountListAddress(address));
     }
 

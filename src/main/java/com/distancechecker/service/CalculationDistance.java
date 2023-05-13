@@ -50,7 +50,6 @@ public class CalculationDistance {
     }
 
     public AddressFullDto getFirstElement(List<AddressComparableDto> listAddressInOrder) {
-
         return new AddressFullDto(listAddressInOrder.get(FIRST_POSITION));
     }
 
