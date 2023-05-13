@@ -1,19 +1,18 @@
 package com.distancechecker.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class ResponseGeolocationApiDto implements Serializable {
-    public ArrayList<ResultDto> results;
+    public List<ResultDto> results;
     public String status;
 }

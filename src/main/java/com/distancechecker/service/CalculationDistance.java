@@ -23,30 +23,41 @@ public class CalculationDistance {
 
         List<AddressComparableDto> list = new ArrayList<>();
 
-        for (int i =0; i < responseApi.size(); i++) {
+        for (int i = 0; i < responseApi.size(); i++) {
             for (int y = 0; y < i; y++) {
-                if (i!=y) {
-                    GeometryDto geometryA = responseApi.get(y).results.get(FIRST_POSITION).getGeometry();
-                    GeometryDto geometryB = responseApi.get(i).results.get(FIRST_POSITION).getGeometry();
-
-                    Coordinate coordinateA = new Coordinate(geometryA.getLocation().lat,
-                            geometryA.getLocation().lng);
-                    Coordinate coordinateB = new Coordinate(geometryB.getLocation().lat,
-                            geometryB.getLocation().lng);
-
-
-                    double distance = Haversine.calculateDistance(coordinateA, coordinateB, Unit.Kilometers);
-                    String addressA = responseApi.get(y).results.get(FIRST_POSITION).formattedAddress;
-                    String addressB = responseApi.get(i).results.get(FIRST_POSITION).formattedAddress;
-
-                    list.add(new AddressComparableDto(distance, addressA, addressB));
+                if (i == y) {
+                    continue;
                 }
+                GeometryDto geometryA = getGeometry(responseApi, y);
+                GeometryDto geometryB = getGeometry(responseApi, i);
+
+                Coordinate coordinateA = createCoordinate(geometryA);
+                Coordinate coordinateB = createCoordinate(geometryB);
+
+                double distance = Haversine.calculateDistance(coordinateA, coordinateB, Unit.Kilometers);
+                String addressA = getFormattedAddress(responseApi, y);
+                String addressB = getFormattedAddress(responseApi, i);
+
+                list.add(new AddressComparableDto(distance, addressA, addressB));
             }
         }
 
         Collections.sort(list, Comparator.naturalOrder());
 
         return list;
+    }
+
+    private static String getFormattedAddress(List<ResponseGeolocationApiDto> responseApi, int position) {
+        return responseApi.get(position).results.get(FIRST_POSITION).formattedAddress;
+    }
+
+    private static GeometryDto getGeometry(List<ResponseGeolocationApiDto> responseApi, int position) {
+        return responseApi.get(position).results.get(FIRST_POSITION).getGeometry();
+    }
+
+    private static Coordinate createCoordinate(GeometryDto geometry) {
+        return new Coordinate(geometry.getLocation().lat,
+                geometry.getLocation().lng);
     }
 
     public AddressFullDto getFirstElement(List<AddressComparableDto> listAddressInOrder) {

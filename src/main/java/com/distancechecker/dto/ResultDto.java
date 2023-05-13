@@ -1,16 +1,19 @@
 package com.distancechecker.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class ResultDto{
     @JsonProperty("address_components")
-    public ArrayList<AddressComponentDto> addressComponents;
+    public List<AddressComponentDto> addressComponents;
     @JsonProperty("formatted_address")
     public String formattedAddress;
     public GeometryDto geometry;
@@ -20,5 +23,5 @@ public class ResultDto{
     public String placeId;
     @JsonProperty("plus_code")
     public PlusCodeDto plusCode;
-    public ArrayList<String> types;
+    public List<String> types;
 }
