@@ -51,20 +51,25 @@ public class CalculationDistance {
     private static String getFormattedAddress(List<ResponseGeolocationApiDto> responseApi, int position) {
         Optional<String> optionalCompleteAddress = Optional
                 .ofNullable(responseApi.get(position).results.get(FIRST_POSITION).formattedAddress);
-        return optionalCompleteAddress.orElseThrow(() -> new FormattedAddressNullException());
+        return optionalCompleteAddress.orElseThrow(FormattedAddressNullException::new);
     }
 
     private static GeometryDto getGeometry(List<ResponseGeolocationApiDto> responseApi, int position) {
         Optional<GeometryDto> optionalGeometry = Optional
                 .ofNullable(responseApi.get(position).results.get(FIRST_POSITION).getGeometry());
-        return optionalGeometry.orElseThrow(() -> new AddressGeometryNullException());
+        return optionalGeometry.orElseThrow(AddressGeometryNullException::new);
     }
 
     private static Coordinate createCoordinate(GeometryDto geometry) {
-        Optional<Double> optionalLat = Optional.ofNullable(geometry.getLocation().lat);
-        Optional<Double> optionalLng = Optional.ofNullable(geometry.getLocation().lng);
-        return new Coordinate(optionalLat.orElseThrow(() -> new AddressGeolocationNullException("Latitude")),
-                optionalLng.orElseThrow(() -> new AddressGeolocationNullException("Longitude")));
+        Double lat = geometry.getLocation().lat != 0.0 ?
+                geometry.getLocation().lat : throwException("Latitude");
+        Double lng = geometry.getLocation().lng != 0.0 ?
+                geometry.getLocation().lng : throwException("Longitude");
+        return new Coordinate(lat, lng);
+    }
+
+    private static Double throwException(String latOrLng) {
+        throw new AddressGeolocationNullException(latOrLng);
     }
 
     public AddressFullDto getFirstElement(List<AddressComparableDto> listAddressInOrder) {

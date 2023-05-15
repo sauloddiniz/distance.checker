@@ -2,16 +2,12 @@ package com.distancechecker.config;
 
 import com.distancechecker.client.ConnectGeolocationApi;
 import com.distancechecker.dto.ResponseGeolocationApiDto;
-import com.distancechecker.service.AddressService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 

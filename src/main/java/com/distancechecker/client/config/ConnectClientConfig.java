@@ -1,4 +1,4 @@
-package com.distancechecker.client;
+package com.distancechecker.client.config;
 
 import feign.Logger;
 import feign.codec.ErrorDecoder;

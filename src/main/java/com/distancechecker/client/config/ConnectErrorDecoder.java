@@ -1,4 +1,4 @@
-package com.distancechecker.client;
+package com.distancechecker.client.config;
 
 import com.distancechecker.exceptions.ClientApiFeingException;
 import com.fasterxml.jackson.core.JsonProcessingException;

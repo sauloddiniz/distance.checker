@@ -1,4 +1,4 @@
-package com.distancechecker.client;
+package com.distancechecker.client.config;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

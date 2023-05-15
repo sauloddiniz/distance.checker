@@ -16,13 +16,16 @@ Antes de começar, certifique-se de ter os seguintes requisitos instalados no se
 
 ### Executar ambiente local
 No diretório raiz do projeto execute o comando
-- spring-boot:run  
+````
+spring-boot:run  
+````
 
 ### Executar ambiente docker
 #### Observação: Este processo pode levar tempo.
 No diretório raiz do projeto execute o comando
-- docker build -t distance-checker . ; docker run -p 8080:8080 distance-checker
-
+````
+docker build -t distance-checker . ; docker run -p 8080:8080 distance-checker
+````
 ### Uso
 #### Observação: Para garantir o correto funcionamento do processo, é necessário fornecer no mínimo três endereços e utilizar o ponto e vírgula " ; " como separador para indicar o fim de cada endereço.
 - http://localhost:8080/swagger-ui/index.html#/

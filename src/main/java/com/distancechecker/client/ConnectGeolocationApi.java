@@ -1,10 +1,10 @@
 package com.distancechecker.client;
 
+import com.distancechecker.client.config.ConnectClientConfig;
 import com.distancechecker.dto.ResponseGeolocationApiDto;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
