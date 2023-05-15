@@ -20,6 +20,7 @@ No diretório raiz do projeto execute o comando
 
 ### Executar ambiente docker
 #### Observação: Este processo pode levar tempo.
+No diretório raiz do projeto execute o comando
 - docker build -t distance-checker . ; docker run -p 8080:8080 distance-checker
 
 ### Uso
