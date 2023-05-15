@@ -77,6 +77,40 @@ public class DefaultResponseEntityExceptionHandler extends ResponseEntityExcepti
                         .build());
     }
 
+    @ExceptionHandler(FormattedAddressNullException.class)
+    public ResponseEntity<ErrorResponseDto> FormattedAddressNullException(FormattedAddressNullException exception, HttpServletRequest request){
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(ErrorResponseDto
+                        .builder()
+                        .message(exception.getMessage())
+                        .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                        .path(request.getServletPath())
+                        .method(request.getMethod())
+                        .build());
+    }
+    @ExceptionHandler(AddressGeometryNullException.class)
+    public ResponseEntity<ErrorResponseDto> addressGeometryNullException(AddressGeometryNullException exception, HttpServletRequest request){
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(ErrorResponseDto
+                        .builder()
+                        .message(exception.getMessage())
+                        .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                        .path(request.getServletPath())
+                        .method(request.getMethod())
+                        .build());
+    }
+    @ExceptionHandler(AddressGeolocationNullException.class)
+    public ResponseEntity<ErrorResponseDto> addressGeolocationNullException(AddressGeolocationNullException exception, HttpServletRequest request){
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(ErrorResponseDto
+                        .builder()
+                        .message(exception.getMessage())
+                        .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                        .path(request.getServletPath())
+                        .method(request.getMethod())
+                        .build());
+    }
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid
             (MethodArgumentNotValidException ex, HttpHeaders headers,

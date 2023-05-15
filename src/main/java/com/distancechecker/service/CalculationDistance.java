@@ -4,15 +4,16 @@ import com.distancechecker.dto.AddressComparableDto;
 import com.distancechecker.dto.AddressFullDto;
 import com.distancechecker.dto.GeometryDto;
 import com.distancechecker.dto.ResponseGeolocationApiDto;
+import com.distancechecker.exceptions.AddressBlankException;
+import com.distancechecker.exceptions.AddressGeolocationNullException;
+import com.distancechecker.exceptions.AddressGeometryNullException;
+import com.distancechecker.exceptions.FormattedAddressNullException;
 import dev.loqo71la.haversine.Coordinate;
 import dev.loqo71la.haversine.Haversine;
 import dev.loqo71la.haversine.Unit;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 import static com.distancechecker.utils.ValuesUtils.FIRST_POSITION;
 
@@ -28,11 +29,11 @@ public class CalculationDistance {
                 if (i == y) {
                     continue;
                 }
-                GeometryDto geometryA = getGeometry(responseApi, y);
-                GeometryDto geometryB = getGeometry(responseApi, i);
+                GeometryDto addressGeometryA = getGeometry(responseApi, y);
+                GeometryDto addressGeometryB = getGeometry(responseApi, i);
 
-                Coordinate coordinateA = createCoordinate(geometryA);
-                Coordinate coordinateB = createCoordinate(geometryB);
+                Coordinate coordinateA = createCoordinate(addressGeometryA);
+                Coordinate coordinateB = createCoordinate(addressGeometryB);
 
                 double distance = Haversine.calculateDistance(coordinateA, coordinateB, Unit.Kilometers);
                 String addressA = getFormattedAddress(responseApi, y);
@@ -48,16 +49,22 @@ public class CalculationDistance {
     }
 
     private static String getFormattedAddress(List<ResponseGeolocationApiDto> responseApi, int position) {
-        return responseApi.get(position).results.get(FIRST_POSITION).formattedAddress;
+        Optional<String> optionalCompleteAddress = Optional
+                .ofNullable(responseApi.get(position).results.get(FIRST_POSITION).formattedAddress);
+        return optionalCompleteAddress.orElseThrow(() -> new FormattedAddressNullException());
     }
 
     private static GeometryDto getGeometry(List<ResponseGeolocationApiDto> responseApi, int position) {
-        return responseApi.get(position).results.get(FIRST_POSITION).getGeometry();
+        Optional<GeometryDto> optionalGeometry = Optional
+                .ofNullable(responseApi.get(position).results.get(FIRST_POSITION).getGeometry());
+        return optionalGeometry.orElseThrow(() -> new AddressGeometryNullException());
     }
 
     private static Coordinate createCoordinate(GeometryDto geometry) {
-        return new Coordinate(geometry.getLocation().lat,
-                geometry.getLocation().lng);
+        Optional<Double> optionalLat = Optional.ofNullable(geometry.getLocation().lat);
+        Optional<Double> optionalLng = Optional.ofNullable(geometry.getLocation().lng);
+        return new Coordinate(optionalLat.orElseThrow(() -> new AddressGeolocationNullException("Latitude")),
+                optionalLng.orElseThrow(() -> new AddressGeolocationNullException("Longitude")));
     }
 
     public AddressFullDto getFirstElement(List<AddressComparableDto> listAddressInOrder) {

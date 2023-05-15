@@ -137,6 +137,8 @@ class AddressServiceTest {
     @Test
     void whenMountListReceivedThirdCorrectAddress() {
 
+        int sizeList = 3;
+
         Random random = new Random();
 
         ResponseGeolocationApiDto firstReturn =
@@ -205,5 +207,6 @@ class AddressServiceTest {
         ResponseDto responseDto = service.mountListAddress(inputAddress);
 
         Assertions.assertNotNull(responseDto);
+        Assertions.assertEquals(sizeList,responseDto.getDistanceAddressList().size());
     }
 }

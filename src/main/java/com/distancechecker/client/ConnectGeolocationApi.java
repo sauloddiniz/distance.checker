@@ -1,6 +1,7 @@
 package com.distancechecker.client;
 
 import com.distancechecker.dto.ResponseGeolocationApiDto;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
         configuration = ConnectClientConfig.class)
 public interface ConnectGeolocationApi {
 
+    @Cacheable("address-cached")
     @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseGeolocationApiDto getGeolocationByAddress(@RequestParam("address") final String address);
 }
