@@ -125,66 +125,17 @@ class AddressServiceTest {
         assertEquals(messageReturn, exception.getMessage());
     }
     @Test
-    void whenMountListReceivedThirdCorrectAddress() {
+    void whenReceivingListWithThreeCorrectAddresses() {
 
-        int sizeList = 3;
+        int numberSizeAddressComparable = 3;
 
         Random random = new Random();
-
         ResponseGeolocationApiDto firstReturn =
-                ResponseGeolocationApiDto
-                        .builder()
-                        .results(List.of(ResultDto
-                                .builder()
-                                .formattedAddress("Rua das Goiabas")
-                                .geometry(GeometryDto
-                                        .builder()
-                                        .location(LocationDto
-                                                .builder()
-                                                .lat(random.nextDouble() * -90.0)
-                                                .lng(random.nextDouble() * -180.0)
-                                                .build())
-                                        .build())
-                                .build()))
-                        .status("OK")
-                        .build();
-
+                createResponseGeolocation("Rua das Goianas", random);
         ResponseGeolocationApiDto secondReturn =
-                ResponseGeolocationApiDto
-                        .builder()
-                        .results(List.of(ResultDto
-                                .builder()
-                                .formattedAddress("Rua das Aboboras")
-                                .geometry(GeometryDto
-                                        .builder()
-                                        .location(LocationDto
-                                                .builder()
-                                                .lat(random.nextDouble() * -90.0)
-                                                .lng(random.nextDouble() * -180.0)
-                                                .build())
-                                        .build())
-                                .build()))
-                        .status("OK")
-                        .build();
-
+                createResponseGeolocation("rua das Aboboras", random);
         ResponseGeolocationApiDto thirdReturn =
-                ResponseGeolocationApiDto
-                        .builder()
-                        .results(List.of(ResultDto
-                                .builder()
-                                .formattedAddress("Rua das Mandiocas")
-                                .geometry(GeometryDto
-                                        .builder()
-                                        .location(LocationDto
-                                                .builder()
-                                                .lat(random.nextDouble() * -90.0)
-                                                .lng(random.nextDouble() * -180.0)
-                                                .build())
-                                        .build())
-                                .build()))
-                        .status("OK")
-                        .build();
-
+                createResponseGeolocation("rua das Mandiocas", random);
         String inputAddress = "Rua das Goiabas;" +
                 "Rua das Aboboras;" +
                 "Rua das Mandiocas;";
@@ -197,6 +148,69 @@ class AddressServiceTest {
         ResponseDto responseDto = service.mountListAddress(inputAddress);
 
         Assertions.assertNotNull(responseDto);
-        Assertions.assertEquals(sizeList,responseDto.getDistanceAddressList().size());
+        Assertions.assertEquals(numberSizeAddressComparable,responseDto.getDistanceAddressList().size());
+    }
+    @Test
+    void whenReceivingListWithFourCorrectAddresses() {
+
+        int numberSizeAddressComparable = 6;
+
+        Random random = new Random();
+        ResponseGeolocationApiDto firstReturn =
+                createResponseGeolocation("Rua das Goianas", random);
+        ResponseGeolocationApiDto secondReturn =
+                createResponseGeolocation("rua das Aboboras", random);
+        ResponseGeolocationApiDto thirdReturn =
+                createResponseGeolocation("rua das Mandiocas", random);
+        ResponseGeolocationApiDto fourthReturn =
+                createResponseGeolocation("rua das Flores", random);
+        String inputAddress = "Rua das Goiabas;" +
+                "Rua das Aboboras;" +
+                "Rua das Mandiocas;" +
+                "Rua das Flores;";
+
+        when(geolocationApi.getGeolocationByAddress(anyString()))
+                .thenReturn(firstReturn)
+                .thenReturn(secondReturn)
+                .thenReturn(thirdReturn)
+                .thenReturn(fourthReturn);
+
+        ResponseDto responseDto = service.mountListAddress(inputAddress);
+
+        Assertions.assertNotNull(responseDto);
+        Assertions.assertEquals(numberSizeAddressComparable,responseDto.getDistanceAddressList().size());
+    }
+
+    private static ResponseGeolocationApiDto createResponseGeolocation(String formattedAddress, Random random) {
+        return ResponseGeolocationApiDto
+                .builder()
+                .results(List.of(ResultDto
+                        .builder()
+                        .formattedAddress(formattedAddress)
+                        .geometry(GeometryDto
+                                .builder()
+                                .location(LocationDto
+                                        .builder()
+                                        .lat(random.nextDouble() * -90.0)
+                                        .lng(random.nextDouble() * -180.0)
+                                        .build())
+                                .build())
+                        .build()))
+                .status("OK")
+                .build();
+    }
+    private static ResponseGeolocationApiDto createResponseGeolocation(String formattedAddress, LocationDto location) {
+        return ResponseGeolocationApiDto
+                .builder()
+                .results(List.of(ResultDto
+                        .builder()
+                        .formattedAddress(formattedAddress)
+                        .geometry(GeometryDto
+                                .builder()
+                                .location(location)
+                                .build())
+                        .build()))
+                .status("OK")
+                .build();
     }
 }

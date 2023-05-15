@@ -1,12 +1,12 @@
 package com.distancechecker.dto;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 @Data
 @ToString
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class LocationDto{
     public double lat;
     public double lng;
