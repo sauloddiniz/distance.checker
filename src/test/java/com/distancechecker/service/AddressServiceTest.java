@@ -35,19 +35,19 @@ class AddressServiceTest {
     @Test
     void whenMountListAddressReceiveValuesBlank() {
 
-        String messageReturn = ADDRESS_BLANK_EXCEPTION;
+        String expectedMessageReturn = ADDRESS_BLANK_EXCEPTION;
         String inputAddress = "";
 
         Exception exception = assertThrows(AddressBlankException.class,
                 () -> service.mountListAddress(inputAddress));
 
-        assertEquals(messageReturn, exception.getMessage());
+        assertEquals(expectedMessageReturn, exception.getMessage());
     }
 
     @Test
     void whenMountListAddressReceiveValuesButNotContainsSemicolon() {
 
-        String messageReturn = GENERIC_ADDRESS_EXCEPTION;
+        String expectedMessageReturn = GENERIC_ADDRESS_EXCEPTION;
         String inputAddress = "Av Rio Branco, 1, Centro Rio de Janeiro RJ" +
                 "Praça Mal. Âncora, 122, Centro, Rio de Janeiro RJ" +
                 "Rua 19 de Fevereiro, 34, Botafogo, Rio de Janeiro RJ";
@@ -55,13 +55,13 @@ class AddressServiceTest {
         Exception exception = assertThrows(GenericAddressException.class,
                 () -> service.mountListAddress(inputAddress));
 
-        assertEquals(messageReturn, exception.getMessage());
+        assertEquals(expectedMessageReturn, exception.getMessage());
     }
 
     @Test
     void whenMountListAddressReceiveValuesButNotContainsOneSemicolon() {
 
-        String messageReturn = INSUFFICIENT_ADDRESS_EXCEPTION;
+        String expectedMessageReturn = INSUFFICIENT_ADDRESS_EXCEPTION;
         String inputAddress = "Av Rio Branco, 1, Centro Rio de Janeiro RJ;" +
                 "Praça Mal. Âncora, 122, Centro, Rio de Janeiro RJ" +
                 "Rua 19 de Fevereiro, 34, Botafogo, Rio de Janeiro RJ";
@@ -70,7 +70,7 @@ class AddressServiceTest {
         Exception exception = assertThrows(InsufficientAddressException.class,
                 () -> service.mountListAddress(inputAddress));
 
-        assertEquals(messageReturn, exception.getMessage());
+        assertEquals(expectedMessageReturn, exception.getMessage());
     }
 
     @Test
@@ -83,7 +83,7 @@ class AddressServiceTest {
                         .status("ZERO_RESULTS")
                         .build();
 
-        String messageReturn = ZERO_RESULTS_MESSAGE;
+        String expectedMessageReturn = ZERO_RESULTS_MESSAGE;
         String inputAddress = "AAAAAAA;" +
                 "Praça Mal. Âncora, 122, Centro, Rio de Janeiro RJ;" +
                 "Rua 19 de Fevereiro, 34, Botafogo, Rio de Janeiro RJ;";
@@ -94,7 +94,7 @@ class AddressServiceTest {
         Exception exception = assertThrows(ZeroResultsAddressException.class,
                 () -> service.mountListAddress(inputAddress));
 
-        assertEquals(messageReturn, exception.getMessage());
+        assertEquals(expectedMessageReturn, exception.getMessage());
     }
     @Test
     void whenReceivingListWithThreeCorrectAddresses() {

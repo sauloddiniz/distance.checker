@@ -25,7 +25,7 @@ public class CalculationDistanceTest {
     void whenAddressNotProviderGeometryValue() {
 
         Random random = new Random();
-        String messageReturn = ADDRESS_GEOMETRY_IS_NULL;
+        String expectedMessageReturn = ADDRESS_GEOMETRY_IS_NULL;
 
         List<ResponseGeolocationApiDto> responseApi =
                 List.of(
@@ -37,14 +37,14 @@ public class CalculationDistanceTest {
         Exception exception = assertThrows(AddressGeometryNullException.class,
                 () -> calculationDistance.calc(responseApi));
 
-        assertEquals(messageReturn, exception.getMessage());
+        assertEquals(expectedMessageReturn, exception.getMessage());
     }
 
     @Test
     void whenGeometryNotProviderLatitudeValue() {
 
         Random random = new Random();
-        String messageReturn = ADDRESS_GEOLOCATION_NUMBER_IS_NULL + " Latitude";
+        String expectedMessageReturn = ADDRESS_GEOLOCATION_NUMBER_IS_NULL + " Latitude";
         LocationDto location = new LocationDto(0.0,random.nextDouble() * -180.0);
 
         List<ResponseGeolocationApiDto> responseApi =
@@ -57,14 +57,14 @@ public class CalculationDistanceTest {
         Exception exception = assertThrows(AddressGeolocationNullException.class,
                 () -> calculationDistance.calc(responseApi));
 
-        assertEquals(messageReturn, exception.getMessage());
+        assertEquals(expectedMessageReturn, exception.getMessage());
     }
 
     @Test
     void whenGeometryNotProviderLongitudeValue() {
 
         Random random = new Random();
-        String messageReturn = ADDRESS_GEOLOCATION_NUMBER_IS_NULL + " Longitude";
+        String expectedMessageReturn = ADDRESS_GEOLOCATION_NUMBER_IS_NULL + " Longitude";
         LocationDto location = new LocationDto(random.nextDouble() * -90.0,0.0);
 
         List<ResponseGeolocationApiDto> responseApi =
@@ -77,14 +77,14 @@ public class CalculationDistanceTest {
         Exception exception = assertThrows(AddressGeolocationNullException.class,
                 () -> calculationDistance.calc(responseApi));
 
-        assertEquals(messageReturn, exception.getMessage());
+        assertEquals(expectedMessageReturn, exception.getMessage());
     }
 
     @Test
     void whenAddressNotProviderFormattedAddressValue() {
 
         Random random = new Random();
-        String messageReturn = ADDRESS_FORMATTED_ADDRESS_IS_NULL;
+        String expectedMessageReturn = ADDRESS_FORMATTED_ADDRESS_IS_NULL;
 
         List<ResponseGeolocationApiDto> responseApi =
                 List.of(
@@ -96,13 +96,13 @@ public class CalculationDistanceTest {
         Exception exception = assertThrows(FormattedAddressNullException.class,
                 () -> calculationDistance.calc(responseApi));
 
-        assertEquals(messageReturn, exception.getMessage());
+        assertEquals(expectedMessageReturn, exception.getMessage());
     }
 
     @Test
     void whenComparableNearestAddress() {
 
-        AddressFullDto nearestAddress =
+        AddressFullDto expectedNearestAddress =
                 new AddressFullDto(7.430046995476972,
                         "Rua Duque de Caxias, 264, Centro, Coronel Fabriciano - MG",
                         "Rua das Guianas ,31, Santa Cecilia, Timoteo - MG");
@@ -125,12 +125,12 @@ public class CalculationDistanceTest {
         AddressFullDto firstElement = calculationDistance.getFirstElement(listAddressInOrder);
 
         Assertions.assertNotNull(firstElement);
-        Assertions.assertEquals(firstElement,nearestAddress);
+        Assertions.assertEquals(firstElement,expectedNearestAddress);
     }
     @Test
     void whenComparableFarthestAddress() {
 
-        AddressFullDto farthestAddress =
+        AddressFullDto expectedFarthestAddress =
                 new AddressFullDto(16.924477011219285,
                         "Rua das Guianas ,31, Santa Cecilia, Timoteo - MG",
                         "Avenida Carlos Chagas, 789 - Cidade Nobre, Ipatinga - MG");
@@ -149,7 +149,7 @@ public class CalculationDistanceTest {
         AddressFullDto lastElement = calculationDistance.getLastElement(listAddressInOrder);
 
         Assertions.assertNotNull(lastElement);
-        Assertions.assertEquals(lastElement,farthestAddress);
+        Assertions.assertEquals(lastElement,expectedFarthestAddress);
     }
 
     private static ResponseGeolocationApiDto createResponseGeolocation(String formattedAddress, Random random) {
