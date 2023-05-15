@@ -61,16 +61,6 @@ class AddressServiceTest {
                         .build();
     }
 
-
-    @Test
-    void whenGetAddressReturnGeolocation() {
-        when(geolocationApi.getGeolocationByAddress(anyString())).thenReturn(responseGeolocationApiDto);
-
-        ResponseGeolocationApiDto address = service.getAddress(anyString());
-
-        Assertions.assertNotNull(address);
-    }
-
     @Test
     void whenMountListAddressReceiveValuesBlank() {
 

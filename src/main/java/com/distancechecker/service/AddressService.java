@@ -11,9 +11,6 @@ import com.distancechecker.exceptions.InsufficientAddressException;
 import com.distancechecker.exceptions.ZeroResultsAddressException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.Cache;
-import org.springframework.cache.CacheManager;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,17 +31,12 @@ public class AddressService {
         this.geolocationApi = geolocationApi;
         this.calculationDistance = calculationDistance;
     }
-
-    public ResponseGeolocationApiDto getAddress(String address) {
-        return geolocationApi.getGeolocationByAddress(address);
-    }
-
     public ResponseDto mountListAddress(String addresses) {
 
         List<String> listAddress = verifyAsListValueAddress(addresses);
 
         List<ResponseGeolocationApiDto> responseApi =
-                listAddress.stream().map(e -> getAddress(e)).collect(Collectors.toList());
+                listAddress.stream().map(address -> getGeolocation(address)).collect(Collectors.toList());
 
         verifyStatusListResponseApi(responseApi);
 
@@ -78,5 +70,9 @@ public class AddressService {
             }
         }
         throw new GenericAddressException();
+    }
+
+    private ResponseGeolocationApiDto getGeolocation(String address) {
+        return geolocationApi.getGeolocationByAddress(address);
     }
 }

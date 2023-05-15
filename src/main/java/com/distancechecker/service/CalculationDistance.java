@@ -29,11 +29,11 @@ public class CalculationDistance {
                 if (i == y) {
                     continue;
                 }
-                GeometryDto addressGeometryA = getGeometry(responseApi, y);
-                GeometryDto addressGeometryB = getGeometry(responseApi, i);
+                GeometryDto addressAGeometry = getGeometry(responseApi, y);
+                GeometryDto addressBGeometry = getGeometry(responseApi, i);
 
-                Coordinate coordinateA = createCoordinate(addressGeometryA);
-                Coordinate coordinateB = createCoordinate(addressGeometryB);
+                Coordinate coordinateA = createCoordinate(addressAGeometry);
+                Coordinate coordinateB = createCoordinate(addressBGeometry);
 
                 double distance = Haversine.calculateDistance(coordinateA, coordinateB, Unit.Kilometers);
                 String addressA = getFormattedAddress(responseApi, y);

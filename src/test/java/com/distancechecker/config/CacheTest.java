@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class CacheTest {
 
     @Autowired
-    AddressService addressService;
+    ConnectGeolocationApi geolocationApi;
 
     @Autowired
     CacheManager cacheManager;
@@ -27,9 +27,9 @@ public class CacheTest {
     @Test
     public void testCache() {
 
-        ResponseGeolocationApiDto address = addressService.getAddress("Rua Duque de Caxias, 264, Centro, Coronel Fabriciano - MG");
-        ResponseGeolocationApiDto address2 = addressService.getAddress("Rua Duque de Caxias, 264, Centro, Coronel Fabriciano - MG");
-        ResponseGeolocationApiDto address3 = addressService.getAddress("Rua Duque de Caxias, 264, Centro, Coronel Fabriciano - MG");
+        ResponseGeolocationApiDto address = geolocationApi.getGeolocationByAddress("Rua Duque de Caxias, 264, Centro, Coronel Fabriciano - MG");
+        ResponseGeolocationApiDto address2 = geolocationApi.getGeolocationByAddress("Rua Duque de Caxias, 264, Centro, Coronel Fabriciano - MG");
+        ResponseGeolocationApiDto address3 = geolocationApi.getGeolocationByAddress("Rua Duque de Caxias, 264, Centro, Coronel Fabriciano - MG");
 
         Assertions.assertEquals(address, address2);
         Assertions.assertEquals(address2, address3);
