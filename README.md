@@ -34,4 +34,5 @@ curl -X 'GET' \
   'http://localhost:8080/address?address=Av%20Rio%20Branco%2C%201%2C%20Centro%20Rio%20de%20Janeiro%20RJ%3BPra%C3%A7a%20Mal.%20%C3%82ncora%2C%20122%2C%20Centro%2C%20Rio%20de%20Janeiro%20RJ%3BRua%2019%20de%20Fevereiro%2C%2034%2C%20Botafogo%2C%20Rio%20de%20Janeiro%20RJ%3B' \
   -H 'accept: application/json'
 ````
+![img.png](img.png)
 

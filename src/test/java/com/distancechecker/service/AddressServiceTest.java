@@ -7,7 +7,6 @@ import com.distancechecker.exceptions.GenericAddressException;
 import com.distancechecker.exceptions.InsufficientAddressException;
 import com.distancechecker.exceptions.ZeroResultsAddressException;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -33,41 +32,14 @@ class AddressServiceTest {
     @InjectMocks
     AddressService service;
 
-    ResponseGeolocationApiDto responseGeolocationApiDto;
-
-    @BeforeEach
-    public void init() {
-
-        Random random = new Random();
-        double lat = random.nextDouble() * -90.0;
-        double lng = random.nextDouble() * -180.0;
-
-        responseGeolocationApiDto =
-                ResponseGeolocationApiDto
-                        .builder()
-                        .results(List.of(ResultDto
-                                .builder()
-                                .formattedAddress("R. inventada: lat" + lat + " lng: " + lng)
-                                .geometry(GeometryDto
-                                        .builder()
-                                        .location(LocationDto
-                                                .builder()
-                                                .lat(lat)
-                                                .lng(lng)
-                                                .build())
-                                        .build())
-                                .build()))
-                        .status("OK")
-                        .build();
-    }
-
     @Test
     void whenMountListAddressReceiveValuesBlank() {
 
         String messageReturn = ADDRESS_BLANK_EXCEPTION;
         String inputAddress = "";
 
-        Exception exception = assertThrows(AddressBlankException.class, () -> service.mountListAddress(inputAddress));
+        Exception exception = assertThrows(AddressBlankException.class,
+                () -> service.mountListAddress(inputAddress));
 
         assertEquals(messageReturn, exception.getMessage());
     }

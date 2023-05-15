@@ -2,10 +2,7 @@ package com.distancechecker.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.text.DecimalFormat;
 
@@ -13,6 +10,7 @@ import java.text.DecimalFormat;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class AddressComparableDto implements Comparable<AddressComparableDto>{
     private Double differenceDistanceKm;
     @JsonIgnore
@@ -25,4 +23,7 @@ public class AddressComparableDto implements Comparable<AddressComparableDto>{
         return Double.compare(this.differenceDistanceKm, addressComparable.differenceDistanceKm);
     }
 
+    public AddressComparableDto(Double differenceDistanceKm) {
+        this.differenceDistanceKm = differenceDistanceKm;
+    }
 }
