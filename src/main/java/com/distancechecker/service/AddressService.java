@@ -36,7 +36,7 @@ public class AddressService {
         List<String> listAddress = verifyAsListValueAddress(addresses);
 
         List<ResponseGeolocationApiDto> responseApi =
-                listAddress.stream().map(address -> getGeolocation(address)).collect(Collectors.toList());
+                listAddress.stream().map(this::getGeolocation).collect(Collectors.toList());
 
         verifyStatusListResponseApi(responseApi);
 
@@ -58,7 +58,7 @@ public class AddressService {
     }
 
     private List<String> verifyAsListValueAddress(String addresses) {
-        if (!addresses.isEmpty() && addresses.contains(";")) {
+        if (addresses.contains(";")) {
             List<String> listAddress = Arrays.asList(addresses.split(";"));
             if (listAddress.size() < 3) {
                 throw new InsufficientAddressException();

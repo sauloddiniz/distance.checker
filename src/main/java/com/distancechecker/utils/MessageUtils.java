@@ -7,5 +7,5 @@ public class MessageUtils {
     public final static String ZERO_RESULTS_MESSAGE = "No results found for the given geolocation request.";
     public final static String ADDRESS_GEOMETRY_IS_NULL = "The address does not provide geometric information.";
     public final static String ADDRESS_FORMATTED_ADDRESS_IS_NULL = "The address does not provide formatted address information.";
-    public final static String ADDRESS_GEOLOCATION_NUMBER_IS_NULL = "The address does not include a geolocation number";
+    public final static String ADDRESS_GEOLOCATION_NUMBER_IS_NULL = "The address does not include a geolocation number: ";
 }

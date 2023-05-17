@@ -29,8 +29,7 @@ public class ConnectErrorDecoder implements ErrorDecoder {
     private ErrorResponseGeolocationApi converterStringToObject(final String error) {
         final ObjectMapper mapper = new ObjectMapper();
         try {
-            ErrorResponseGeolocationApi errorResponseGeolocationApi = mapper.readValue(error, ErrorResponseGeolocationApi.class);
-            return errorResponseGeolocationApi;
+            return mapper.readValue(error, ErrorResponseGeolocationApi.class);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }

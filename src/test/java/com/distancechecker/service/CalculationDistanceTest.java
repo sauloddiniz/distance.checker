@@ -25,7 +25,6 @@ public class CalculationDistanceTest {
     void whenAddressNotProviderGeometryValue() {
 
         Random random = new Random();
-        String expectedMessageReturn = ADDRESS_GEOMETRY_IS_NULL;
 
         List<ResponseGeolocationApiDto> responseApi =
                 List.of(
@@ -37,14 +36,14 @@ public class CalculationDistanceTest {
         Exception exception = assertThrows(AddressGeometryNullException.class,
                 () -> calculationDistance.calc(responseApi));
 
-        assertEquals(expectedMessageReturn, exception.getMessage());
+        assertEquals(ADDRESS_GEOMETRY_IS_NULL, exception.getMessage());
     }
 
     @Test
     void whenGeometryNotProviderLatitudeValue() {
 
         Random random = new Random();
-        String expectedMessageReturn = ADDRESS_GEOLOCATION_NUMBER_IS_NULL + " Latitude";
+        String expectedMessageReturn = ADDRESS_GEOLOCATION_NUMBER_IS_NULL + "Latitude";
         LocationDto location = new LocationDto(0.0,random.nextDouble() * -180.0);
 
         List<ResponseGeolocationApiDto> responseApi =
@@ -64,7 +63,7 @@ public class CalculationDistanceTest {
     void whenGeometryNotProviderLongitudeValue() {
 
         Random random = new Random();
-        String expectedMessageReturn = ADDRESS_GEOLOCATION_NUMBER_IS_NULL + " Longitude";
+        String expectedMessageReturn = ADDRESS_GEOLOCATION_NUMBER_IS_NULL + "Longitude";
         LocationDto location = new LocationDto(random.nextDouble() * -90.0,0.0);
 
         List<ResponseGeolocationApiDto> responseApi =
@@ -84,7 +83,6 @@ public class CalculationDistanceTest {
     void whenAddressNotProviderFormattedAddressValue() {
 
         Random random = new Random();
-        String expectedMessageReturn = ADDRESS_FORMATTED_ADDRESS_IS_NULL;
 
         List<ResponseGeolocationApiDto> responseApi =
                 List.of(
@@ -96,7 +94,7 @@ public class CalculationDistanceTest {
         Exception exception = assertThrows(FormattedAddressNullException.class,
                 () -> calculationDistance.calc(responseApi));
 
-        assertEquals(expectedMessageReturn, exception.getMessage());
+        assertEquals(ADDRESS_FORMATTED_ADDRESS_IS_NULL, exception.getMessage());
     }
 
     @Test

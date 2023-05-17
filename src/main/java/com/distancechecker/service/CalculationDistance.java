@@ -43,7 +43,7 @@ public class CalculationDistance {
             }
         }
 
-        Collections.sort(list, Comparator.naturalOrder());
+        list.sort(Comparator.naturalOrder());
 
         return list;
     }
@@ -61,9 +61,9 @@ public class CalculationDistance {
     }
 
     private static Coordinate createCoordinate(GeometryDto geometry) {
-        Double lat = geometry.getLocation().lat != 0.0 ?
+        double lat = geometry.getLocation().lat != 0.0 ?
                 geometry.getLocation().lat : throwException("Latitude");
-        Double lng = geometry.getLocation().lng != 0.0 ?
+        double lng = geometry.getLocation().lng != 0.0 ?
                 geometry.getLocation().lng : throwException("Longitude");
         return new Coordinate(lat, lng);
     }
