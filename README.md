@@ -6,6 +6,10 @@
 
 -   [Guia de uso](#guia-de-uso)
     -   [Pré-requisitos ambiente local](#pre-requisitos-local)
+    -   [Pré-requisitos docker](#pre-requisitos-docker)
+-   [Executar ambiente local](#ambiente-local)
+-   [Executar ambiente docker](#ambiente-docker)
+-   [Uso](#uso-api)
 
 ## <a name="guia-de-uso"></a>Guia de uso
 ### <a name="pre-requisitos-local"></a>Pré-requisitos ambiente local
@@ -14,23 +18,23 @@ Antes de começar, certifique-se de ter os seguintes requisitos instalados no se
 - Java 17: Certifique-se de ter o JDK (Java Development Kit) 17 ou uma versão superior instalada no seu sistema.
 - Maven: O projeto requer o Apache Maven para gerenciamento de dependências e compilação. Certifique-se de ter o Maven instalado no seu sistema.
 
-### Pré-requisitos docker
+### <a name="pre-requisitos-docker"></a>Pré-requisitos docker
 Antes de começar, certifique-se de ter os seguintes requisitos instalados no seu sistema:
 - docker
 
-### Executar ambiente local
+### <a name="ambiente-local"></a>Executar ambiente local
 No diretório raiz do projeto execute o comando
 ````
 spring-boot:run  
 ````
 
-### Executar ambiente docker
+### <a name="ambiente-docker"></a>Executar ambiente docker
 #### Observação: Este processo pode levar tempo.
 No diretório raiz do projeto execute o comando
 ````
 docker build -t distance-checker . ; docker run -p 8080:8080 distance-checker
 ````
-### Uso
+### <a name="uso-api"></a>Uso
 #### Observação: Para garantir o correto funcionamento do processo, é necessário fornecer no mínimo três endereços e utilizar o ponto e vírgula " ; " como separador para indicar o fim de cada endereço.
 - http://localhost:8080/swagger-ui/index.html#/
 ````
