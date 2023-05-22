@@ -6,9 +6,6 @@
 
 -   [Guia de uso](#guia-de-uso)
     -   [Pré-requisitos ambiente local](#pre-requisitos-local)
--   [Rodando o projeto](#rodando-o-projeto)
--   [Publicando atualizações no app](#publicando-atualiza-es-no-app)
-    -   [Pipelines](#pipelines)
 
 ## <a name="guia-de-uso"></a>Guia de uso
 ### <a name="pre-requisitos-local"></a>Pré-requisitos ambiente local
