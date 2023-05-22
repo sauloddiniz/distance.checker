@@ -7,8 +7,9 @@
 -   [Guia de uso](#guia-de-uso)
     -   [Pré-requisitos ambiente local](#pre-requisitos-local)
     -   [Pré-requisitos docker](#pre-requisitos-docker)
--   [Executar ambiente local](#ambiente-local)
--   [Executar ambiente docker](#ambiente-docker)
+-   [Executar](#executar-api)
+    -   [ambiente local](#ambiente-local)
+    -   [ambiente docker](#ambiente-docker)
 -   [Uso](#uso-api)
 
 ## <a name="guia-de-uso"></a>Guia de uso
@@ -22,13 +23,14 @@ Antes de começar, certifique-se de ter os seguintes requisitos instalados no se
 Antes de começar, certifique-se de ter os seguintes requisitos instalados no seu sistema:
 - docker
 
-### <a name="ambiente-local"></a>Executar ambiente local
+### <a name="executar-api"></a>Executar
+### <a name="ambiente-local"></a>ambiente local
 No diretório raiz do projeto execute o comando
 ````
 spring-boot:run  
 ````
 
-### <a name="ambiente-docker"></a>Executar ambiente docker
+### <a name="ambiente-docker"></a>ambiente docker
 #### Observação: Este processo pode levar tempo.
 No diretório raiz do projeto execute o comando
 ````
