@@ -149,6 +149,7 @@ class AddressServiceTest {
         Assertions.assertEquals(numberSizeAddressComparable,responseDto.getDistanceAddressList().size());
     }
 
+
     private static ResponseGeolocationApiDto createResponseGeolocation(String formattedAddress, Random random) {
         return ResponseGeolocationApiDto
                 .builder()

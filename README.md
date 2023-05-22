@@ -2,9 +2,16 @@
 
 #### O Distance Checker é um projeto educacional que visa analisar a escrita de código e realizar análises de distância entre endereços fornecidos pelos usuários. A API foi desenvolvida para calcular e apresentar os endereços mais próximos e mais distantes com base nas informações fornecidas. O objetivo principal é auxiliar na visualização e compreensão das distâncias entre diferentes locais.
 
-### Guia de uso da API
-### Pré-requisitos ambiente local
+## Índice
 
+-   [Guia de uso](#guia-de-uso)
+    -   [Pré-requisitos ambiente local](#pre-requisitos-local)
+-   [Rodando o projeto](#rodando-o-projeto)
+-   [Publicando atualizações no app](#publicando-atualiza-es-no-app)
+    -   [Pipelines](#pipelines)
+
+## <a name="guia-de-uso"></a>Guia de uso
+### <a name="pre-requisitos-local"></a>Pré-requisitos ambiente local
 Antes de começar, certifique-se de ter os seguintes requisitos instalados no seu sistema:
 
 - Java 17: Certifique-se de ter o JDK (Java Development Kit) 17 ou uma versão superior instalada no seu sistema.

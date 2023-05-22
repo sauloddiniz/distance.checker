@@ -4,6 +4,7 @@ import com.distancechecker.client.ConnectGeolocationApi;
 import com.distancechecker.dto.ResponseGeolocationApiDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cache.Cache;
@@ -23,6 +24,9 @@ public class CacheTest {
     @Test
     public void testCache() {
 
+        Cache cache = cacheManager.getCache("address-cached");
+        cache.clear();
+
         ResponseGeolocationApiDto address = geolocationApi.getGeolocationByAddress("Rua Duque de Caxias, 264, Centro, Coronel Fabriciano - MG");
         ResponseGeolocationApiDto address2 = geolocationApi.getGeolocationByAddress("Rua Duque de Caxias, 264, Centro, Coronel Fabriciano - MG");
         ResponseGeolocationApiDto address3 = geolocationApi.getGeolocationByAddress("Rua Duque de Caxias, 264, Centro, Coronel Fabriciano - MG");
@@ -30,7 +34,6 @@ public class CacheTest {
         Assertions.assertEquals(address, address2);
         Assertions.assertEquals(address2, address3);
 
-        Cache cache = cacheManager.getCache("address-cached");
         assertNotNull(cache.get("Rua Duque de Caxias, 264, Centro, Coronel Fabriciano - MG"));
     }
 }
