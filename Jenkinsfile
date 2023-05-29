@@ -2,12 +2,13 @@ node {
     // Defina os parâmetros de entrada
     def branchName = params.BRANCH_NAME
     def environment = params.ENVIRONMENT
+    def branchName = branchName.replaceFirst('origin/', '')
 
     stage('Clonar Projeto') {
         echo "Clonando o projeto"
         echo "Branch: ${branchName}"
         echo "Ambiente: ${environment}"
-        git branch: 'master', url: 'https://github.com/sauloddiniz/distance.checker.git'
+        git branch: branchName, url: 'https://github.com/sauloddiniz/distance.checker.git'
     }
 
     stage('Outras Etapas') {
