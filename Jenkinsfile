@@ -7,7 +7,7 @@ node {
         echo "Clonando o projeto"
         echo "Branch: ${branchName}"
         echo "Ambiente: ${environment}"
-        git branch: branchName, url: 'https://github.com/sauloddiniz/distance.checker.git'
+        git branch: 'master', url: 'https://github.com/sauloddiniz/distance.checker.git'
     }
 
     stage('Outras Etapas') {
