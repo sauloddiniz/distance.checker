@@ -4,6 +4,9 @@ node {
     def environment = params.ENVIRONMENT
 
     stage('Clonar Projeto') {
+        echo "Clonando o projeto"
+        echo "Branch: ${branchName}"
+        echo "Ambiente: ${environment}"
         git branch: branchName, url: 'https://github.com/sauloddiniz/distance.checker.git'
     }
 
