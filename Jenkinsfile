@@ -1,8 +1,8 @@
 node {
     // Defina os parâmetros de entrada
-    def branchName = params.BRANCH_NAME
+    def fullBranchName = params.BRANCH_NAME
     def environment = params.ENVIRONMENT
-    def branchName = branchName.replaceFirst('origin/', '')
+    def branchName = fullBranchName.replaceFirst('origin/', '')
 
     stage('Clonar Projeto') {
         echo "Clonando o projeto"
