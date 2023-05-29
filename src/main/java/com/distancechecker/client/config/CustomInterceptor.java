@@ -2,7 +2,6 @@ package com.distancechecker.client.config;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
-import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -16,10 +15,5 @@ public class CustomInterceptor implements RequestInterceptor {
     @Override
     public void apply(RequestTemplate requestTemplate) {
         requestTemplate.query(param,paramValue);
-    }
-
-    @PostConstruct
-    private void postConstructor() {
-        System.out.println(paramValue);
     }
 }
