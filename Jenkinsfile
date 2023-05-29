@@ -1,18 +1,16 @@
 node {
-  stage("Clone the project") {
-    git branch: 'master', url: 'https://github.com/sauloddiniz/distance.checker.git'
-  }
+    // Defina os parâmetros de entrada
+    def branchName = params.BRANCH_NAME
+    def environment = params.ENVIRONMENT
 
-  stage("Compilation") {
-    sh "./mvnw clean install -DskipTests"
-  }
+    stage('Clonar Projeto') {
+        git branch: branchName, url: 'https://github.com/sauloddiniz/distance.checker.git'
+    }
 
-  stage("Tests and Deployment") {
-    stage("Runing unit tests") {
-      sh "./mvnw test -Punit"
+    stage('Outras Etapas') {
+        // Adicione as outras etapas do seu pipeline
+        // Usando os valores dos parâmetros
+        echo "Branch: ${branchName}"
+        echo "Ambiente: ${environment}"
     }
-    stage("Deployment") {
-      sh 'nohup ./mvnw spring-boot:run -Dserver.port=8001 &'
-    }
-  }
 }
