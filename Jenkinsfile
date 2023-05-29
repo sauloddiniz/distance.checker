@@ -5,16 +5,16 @@ node {
     def branchName = fullBranchName.replaceFirst('origin/', '')
 
     stage('Clonar Projeto') {
-        echo "Clonando o projeto"
-        echo "Branch: ${branchName}"
-        echo "Ambiente: ${environment}"
         git branch: branchName, url: 'https://github.com/sauloddiniz/distance.checker.git'
     }
 
     stage('Outras Etapas') {
-        // Adicione as outras etapas do seu pipeline
-        // Usando os valores dos parâmetros
         echo "Branch: ${branchName}"
         echo "Ambiente: ${environment}"
+    }
+
+    stage('Executar Testes') {
+        echo "Testes iniciados"
+        sh 'mvn test'
     }
 }
