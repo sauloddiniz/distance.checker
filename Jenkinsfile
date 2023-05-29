@@ -13,6 +13,10 @@ node {
         echo "Ambiente: ${environment}"
     }
 
+    stage('Build da Aplicação') {
+        sh 'mvn package'
+    }
+
     stage('Executar Testes') {
         echo "Testes iniciados"
         sh 'mvn test'
