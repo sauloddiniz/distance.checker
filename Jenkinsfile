@@ -1,10 +1,15 @@
 pipeline {
+    parameters {
+        string(name: 'BRANCH', defaultValue: 'main', description: 'Branch do repositório')
+        string(name: 'AMBIENTE', defaultValue: 'dev', description: 'Ambiente de deploy')
+    }
+
     agent any
 
     stages {
         stage('Clonar repositório') {
             steps {
-                git 'https://github.com/sauloddiniz/distance.checker'
+                git branch: "${params.BRANCH}", url: 'https://github.com/sauloddiniz/distance.checker.git'
             }
         }
 
@@ -22,16 +27,14 @@ pipeline {
 
         stage('Deploy no EC2') {
             steps {
-                script {
-                    def awsAccessKeyId = credentials('aws-access-key')
-                    def awsSecretAccessKey = credentials('aws-secret-access-key')
-                    def ec2Instance = 'seu-id-da-instancia-ec2'
-                    def region = 'sua-regiao-da-aws'
-                    def artifactPath = 'caminho/do/seu/pacote.jar'
-
-                    withAWS(region: region, credentials: awsAccessKeyId) {
-                        sh "aws configure set aws_access_key_id ${awsAccessKeyId}"
-                        sh "aws configure set aws_secret_access_key ${awsSecretAccessKey}"
+                withCredentials([
+                    awsAccessKey(credentialsId: 'aws-access-key', variable: 'AWS_ACCESS_KEY_ID'),
+                    awsSecretKey(credentialsId: 'aws-secret-access-key', variable: 'AWS_SECRET_ACCESS_KEY')
+                ]) {
+                    script {
+                        def ec2Instance = 'seu-id-da-instancia-ec2'
+                        def region = 'sua-regiao-da-aws'
+                        def artifactPath = 'caminho/do/seu/pacote.jar'
 
                         sh "aws ec2 run-command --instance-id ${ec2Instance} --region ${region} --command 'sudo service minha-aplicacao stop'"
                         sh "aws s3 cp ${artifactPath} s3://seu-bucket"
@@ -43,4 +46,3 @@ pipeline {
         }
     }
 }
-
