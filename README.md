@@ -27,7 +27,7 @@ Antes de começar, certifique-se de ter os seguintes requisitos instalados no se
 ### <a name="ambiente-local"></a>ambiente local
 No diretório raiz do projeto execute o comando
 ````
-spring-boot:run  
+mvn spring-boot:run  
 ````
 
 ### <a name="ambiente-docker"></a>ambiente docker

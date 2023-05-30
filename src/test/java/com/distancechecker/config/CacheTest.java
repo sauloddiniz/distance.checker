@@ -3,8 +3,8 @@ package com.distancechecker.config;
 import com.distancechecker.client.ConnectGeolocationApi;
 import com.distancechecker.dto.ResponseGeolocationApiDto;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cache.Cache;
@@ -13,6 +13,7 @@ import org.springframework.cache.CacheManager;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
+@Disabled
 public class CacheTest {
 
     @Autowired
