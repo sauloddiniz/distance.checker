@@ -1,0 +1,24 @@
+FROM jenkins/jenkins:latest
+
+USER root
+
+ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+
+# Instalação do Maven
+RUN apt-get update \
+    && apt-get install -y maven
+
+# Instalação do Gradle
+ENV GRADLE_VERSION=7.3
+RUN curl -L -o gradle-${GRADLE_VERSION}-bin.zip https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip \
+    && unzip gradle-${GRADLE_VERSION}-bin.zip \
+    && mv gradle-${GRADLE_VERSION} /opt/gradle \
+    && rm gradle-${GRADLE_VERSION}-bin.zip
+
+ENV GRADLE_HOME=/opt/gradle
+ENV PATH=$PATH:$GRADLE_HOME/bin
+
+# Instalação do Java 17
+RUN apt-get install -y openjdk-17-jdk
+
+USER jenkins
