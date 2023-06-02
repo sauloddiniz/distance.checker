@@ -1,10 +1,11 @@
 package com.distancechecker.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
-
-import java.text.DecimalFormat;
+import lombok.Data;
+import lombok.ToString;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 @Data
 @ToString

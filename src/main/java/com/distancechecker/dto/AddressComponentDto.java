@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -13,8 +12,8 @@ import java.util.List;
 @Builder
 public class AddressComponentDto {
     @JsonProperty("long_name")
-    public String longName;
+    private String longName;
     @JsonProperty("short_name")
-    public String shortName;
-    public List<String> types;
+    private String shortName;
+    private List<String> types;
 }

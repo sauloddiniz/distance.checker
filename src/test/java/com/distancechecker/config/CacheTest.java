@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 @Disabled
-public class CacheTest {
+class CacheTest {
 
     @Autowired
     ConnectGeolocationApi geolocationApi;
@@ -23,7 +23,7 @@ public class CacheTest {
     CacheManager cacheManager;
 
     @Test
-    public void testCache() {
+    void testCache() {
 
         Cache cache = cacheManager.getCache("address-cached");
         cache.clear();

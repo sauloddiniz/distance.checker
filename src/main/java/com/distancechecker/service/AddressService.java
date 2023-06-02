@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Arrays;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.distancechecker.utils.ValuesUtils.ZERO_RESULTS;
 
@@ -36,11 +37,11 @@ public class AddressService {
         List<String> listAddress = verifyAsListValueAddress(addresses);
 
         List<ResponseGeolocationApiDto> responseApi =
-                listAddress.stream().map(this::getGeolocation).collect(Collectors.toList());
+                listAddress.stream().map(this::getGeolocation).toList();
 
         verifyStatusListResponseApi(responseApi);
 
-        List<AddressComparableDto> listAddressInOrder = calculationDistance.calc(responseApi);
+        List<AddressComparableDto> listAddressInOrder = calculationDistance.calcDistance(responseApi);
 
         AddressFullDto nearestAddress = calculationDistance.getFirstElement(listAddressInOrder);
 

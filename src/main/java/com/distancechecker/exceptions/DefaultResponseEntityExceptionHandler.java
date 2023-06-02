@@ -78,7 +78,7 @@ public class DefaultResponseEntityExceptionHandler extends ResponseEntityExcepti
     }
 
     @ExceptionHandler(FormattedAddressNullException.class)
-    public ResponseEntity<ErrorResponseDto> FormattedAddressNullException(FormattedAddressNullException exception, HttpServletRequest request){
+    public ResponseEntity<ErrorResponseDto> formattedAddressNullException(FormattedAddressNullException exception, HttpServletRequest request){
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(ErrorResponseDto
                         .builder()
@@ -118,7 +118,7 @@ public class DefaultResponseEntityExceptionHandler extends ResponseEntityExcepti
 
         List<ErrorFieldDto> listError = ex.getFieldErrors()
                 .stream().map(ErrorFieldDto::converter)
-                .collect(Collectors.toList());
+                .toList();
 
         String path = getPath((ServletWebRequest) request);
 

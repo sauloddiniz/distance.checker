@@ -1,9 +1,12 @@
 package com.distancechecker.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
+import lombok.Data;
+import lombok.ToString;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.Builder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -13,15 +16,15 @@ import java.util.List;
 @Builder
 public class ResultDto{
     @JsonProperty("address_components")
-    public List<AddressComponentDto> addressComponents;
+    private List<AddressComponentDto> addressComponents;
     @JsonProperty("formatted_address")
-    public String formattedAddress;
-    public GeometryDto geometry;
+    private String formattedAddress;
+    private GeometryDto geometry;
     @JsonProperty("partial_match")
-    public boolean partialMatch;
+    private boolean partialMatch;
     @JsonProperty("place_id")
-    public String placeId;
+    private String placeId;
     @JsonProperty("plus_code")
-    public PlusCodeDto plusCode;
-    public List<String> types;
+    private PlusCodeDto plusCode;
+    private List<String> types;
 }

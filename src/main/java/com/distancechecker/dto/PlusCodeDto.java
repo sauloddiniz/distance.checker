@@ -8,7 +8,7 @@ import lombok.ToString;
 @ToString
 public class PlusCodeDto{
     @JsonProperty("compound_code")
-    public String compoundCode;
+    private String compoundCode;
     @JsonProperty("global_code")
-    public String globalCode;
+    private String globalCode;
 }

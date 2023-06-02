@@ -4,11 +4,14 @@ import com.distancechecker.dto.*;
 import com.distancechecker.exceptions.AddressGeolocationNullException;
 import com.distancechecker.exceptions.AddressGeometryNullException;
 import com.distancechecker.exceptions.FormattedAddressNullException;
+import dev.loqo71la.haversine.Coordinate;
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Random;
 
@@ -17,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
-public class CalculationDistanceTest {
+class CalculationDistanceTest {
 
     CalculationDistance calculationDistance = new CalculationDistance();
 
@@ -34,7 +37,7 @@ public class CalculationDistanceTest {
                 );
 
         Exception exception = assertThrows(AddressGeometryNullException.class,
-                () -> calculationDistance.calc(responseApi));
+                () -> calculationDistance.calcDistance(responseApi));
 
         assertEquals(ADDRESS_GEOMETRY_IS_NULL, exception.getMessage());
     }
@@ -54,7 +57,7 @@ public class CalculationDistanceTest {
                 );
 
         Exception exception = assertThrows(AddressGeolocationNullException.class,
-                () -> calculationDistance.calc(responseApi));
+                () -> calculationDistance.calcDistance(responseApi));
 
         assertEquals(expectedMessageReturn, exception.getMessage());
     }
@@ -74,11 +77,10 @@ public class CalculationDistanceTest {
                 );
 
         Exception exception = assertThrows(AddressGeolocationNullException.class,
-                () -> calculationDistance.calc(responseApi));
+                () -> calculationDistance.calcDistance(responseApi));
 
         assertEquals(expectedMessageReturn, exception.getMessage());
     }
-
     @Test
     void whenAddressNotProviderFormattedAddressValue() {
 
@@ -92,7 +94,7 @@ public class CalculationDistanceTest {
                 );
 
         Exception exception = assertThrows(FormattedAddressNullException.class,
-                () -> calculationDistance.calc(responseApi));
+                () -> calculationDistance.calcDistance(responseApi));
 
         assertEquals(ADDRESS_FORMATTED_ADDRESS_IS_NULL, exception.getMessage());
     }
@@ -118,7 +120,7 @@ public class CalculationDistanceTest {
                         new LocationDto(-19.4626085,-42.5596159))
         );
 
-        List<AddressComparableDto> listAddressInOrder = calculationDistance.calc(responseApi);
+        List<AddressComparableDto> listAddressInOrder = calculationDistance.calcDistance(responseApi);
 
         AddressFullDto firstElement = calculationDistance.getFirstElement(listAddressInOrder);
 
@@ -142,12 +144,33 @@ public class CalculationDistanceTest {
                         new LocationDto(-19.4626085,-42.5596159))
         );
 
-        List<AddressComparableDto> listAddressInOrder = calculationDistance.calc(responseApi);
+        List<AddressComparableDto> listAddressInOrder = calculationDistance.calcDistance(responseApi);
 
         AddressFullDto lastElement = calculationDistance.getLastElement(listAddressInOrder);
 
         Assertions.assertNotNull(lastElement);
         Assertions.assertEquals(lastElement,expectedFarthestAddress);
+    }
+
+    @Test
+    @SneakyThrows
+    void testIsNotEqual() {
+        Method privateMethod = CalculationDistance.class.getDeclaredMethod("isNotEqual", int.class, int.class);
+        privateMethod.setAccessible(true);
+
+        boolean result = (boolean) privateMethod.invoke(calculationDistance, 3, 4);
+
+        Assertions.assertTrue(result);
+    }
+    @Test
+    @SneakyThrows
+    void testIsNotEqualFalse() {
+        Method privateMethod = CalculationDistance.class.getDeclaredMethod("isNotEqual", int.class, int.class);
+        privateMethod.setAccessible(true);
+
+        boolean result = (boolean) privateMethod.invoke(calculationDistance, 4, 4);
+
+        Assertions.assertFalse(result);
     }
 
     private static ResponseGeolocationApiDto createResponseGeolocation(String formattedAddress, Random random) {

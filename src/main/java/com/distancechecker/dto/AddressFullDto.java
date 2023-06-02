@@ -1,6 +1,10 @@
 package com.distancechecker.dto;
 
-import lombok.*;
+import lombok.Data;
+import lombok.ToString;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.Builder;
 
 @Data
 @ToString
