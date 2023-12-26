@@ -15,15 +15,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Arrays;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 
 import static com.distancechecker.utils.ValuesUtils.ZERO_RESULTS;
 
 @Service
 @Slf4j
 public class AddressService {
-
     private final ConnectGeolocationApi geolocationApi;
     private final CalculationDistance calculationDistance;
 
