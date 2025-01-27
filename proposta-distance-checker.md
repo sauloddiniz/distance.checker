@@ -1,11 +1,12 @@
 ```markdown
-# **Pitch do Projeto DistanceChecker**
+# **Projeto DistanceChecker**
 
-Você já pensou em uma solução eficiente para calcular e comparar a distância entre múltiplos endereços? Apresentamos o **DistanceChecker**, uma aplicação robusta desenvolvida com tecnologias modernas para oferecer soluções dinâmicas no georreferenciamento.
+Você já pensou em uma solução eficiente para calcular e comparar a distância entre múltiplos endereços? Apresentamos o **DistanceChecker**,
+uma aplicação robusta desenvolvida com tecnologias modernas para oferecer soluções dinâmicas no georreferenciamento.
 
 ---
 
-## **🎯 Principais Funcionalidades**
+## ** Principais Funcionalidades**
 
 - **Comparação de Distâncias Entre Endereços**:  
   Calcule as distâncias entre três ou mais endereços fornecidos, obtendo:  
@@ -36,7 +37,7 @@ Você já pensou em uma solução eficiente para calcular e comparar a distânci
 
 ---
 
-## **📌 Aplicações Reais**
+## ** Aplicações Reais**
 
 - **Planejamento Logístico**:  
   Empresas podem planejar rotas otimizadas, reduzindo custos de transporte.  
@@ -46,7 +47,7 @@ Você já pensou em uma solução eficiente para calcular e comparar a distânci
 
 ---
 
-## **🔧 Tecnologias Utilizadas**
+## ** Tecnologias Utilizadas**
 
 - **Java (Spring Boot)**: Estrutura modular e altamente escalável.  
 - **Feign Client**: Integração com serviços externos (como a Geolocation API do Google).  
@@ -57,7 +58,7 @@ Você já pensou em uma solução eficiente para calcular e comparar a distânci
 
 ---
 
-## **✨ Diferenciais Competitivos**
+## ** Diferenciais Competitivos**
 
 - Solução centralizada e altamente eficiente para cálculos de distância.  
 - Pronto para integração com sistemas existentes.  
