@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,15 +19,11 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin("*")
 @RestController
 @RequestMapping("address")
+@RequiredArgsConstructor
 public class AddressController {
 
     final
     AddressService addressService;
-
-    @Autowired
-    public AddressController(AddressService addressService) {
-        this.addressService = addressService;
-    }
 
     @GetMapping
     @Operation(
@@ -44,6 +41,7 @@ public class AddressController {
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponseDto.class))})
     })
+
     ResponseEntity<ResponseDto> getAddress(@RequestParam(value = "address",
             defaultValue = "Av Rio Branco, 1, Centro Rio de Janeiro RJ;" +
                             "Praça Mal. Âncora, 122, Centro, Rio de Janeiro RJ;" +

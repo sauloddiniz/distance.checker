@@ -9,8 +9,8 @@ import com.distancechecker.exceptions.AddressBlankException;
 import com.distancechecker.exceptions.GenericAddressException;
 import com.distancechecker.exceptions.InsufficientAddressException;
 import com.distancechecker.exceptions.ZeroResultsAddressException;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,16 +21,12 @@ import static com.distancechecker.utils.ValuesUtils.ZERO_RESULTS;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class AddressService {
 
     private final ConnectGeolocationApi geolocationApi;
     private final CalculationDistance calculationDistance;
 
-    @Autowired
-    public AddressService(ConnectGeolocationApi geolocationApi, CalculationDistance calculationDistance) {
-        this.geolocationApi = geolocationApi;
-        this.calculationDistance = calculationDistance;
-    }
     public ResponseDto mountListAddress(String addresses) {
 
         List<String> listAddress = verifyAsListValueAddress(addresses);
